@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+
+    .container {
+        display: flex;
+        min-height: calc(100% - 112px);
+    }
+
+    .footer {
+        flex: 1;
+        justify-content: flex-end;
+
+        &_copyright {
+            font-size: 16px;
+        }
+    }
+}
