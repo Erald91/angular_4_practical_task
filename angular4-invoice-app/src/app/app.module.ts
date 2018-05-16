@@ -8,6 +8,8 @@ import { GuardedAppModule } from './guarded-app/guarded-app.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthService } from './services/auth.service';
+
 const routesList: Array<Route> = [
   { path:'login', component: LoginComponent }
 ];
@@ -23,7 +25,7 @@ const routesList: Array<Route> = [
     GuardedAppModule,
     RouterModule.forRoot(routesList)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

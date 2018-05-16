@@ -6,14 +6,11 @@
 
     .form-group {
         .form-control {
-            &.ng-invalid.ng-touched.ng-dirty {
+            &.invalid-input-value {
                 border-left: 5px solid red;
             }
-            &.ng-valid.ng-touched.ng-dirty {
-                border-left: 5px solid green;
-            }
         }
-        
+
         .custom-alert {
             margin-top: 10px;
         }
