@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
 
-const routesList: Array<Route> = [];
+import { AuthGuard } from '../services/auth-guard.service';
+
+import { MainComponent } from './main/main.component';
+
+const routesList: Array<Route> = [
+    { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+    { path: '', pathMatch: 'full', redirectTo: 'main', canActivate: [AuthGuard] }
+];
 
 @NgModule({
     imports: [

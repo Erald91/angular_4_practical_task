@@ -8,6 +8,7 @@ import { GuardedAppModule } from './guarded-app/guarded-app.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 
 const routesList: Array<Route> = [
@@ -25,7 +26,10 @@ const routesList: Array<Route> = [
     GuardedAppModule,
     RouterModule.forRoot(routesList)
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService, 
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

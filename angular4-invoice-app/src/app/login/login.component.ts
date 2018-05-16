@@ -19,7 +19,7 @@ export class LoginComponent {
     public isAuthenticationMessageShown: boolean = false;
 
     constructor(private _auth: AuthService, private _router: Router) {
-
+        
     }
 
     public manageFormControlChange(event, errorPropertykey) {
@@ -40,7 +40,7 @@ export class LoginComponent {
                     this.isAuthenticationMessageShown = true;
                 }
                 // TODO: Do proper redirection after successfull login
-                // this._router.navigate(['/']);
+                this._router.navigate(['/main']);
                 console.log(response);
             })
     }
