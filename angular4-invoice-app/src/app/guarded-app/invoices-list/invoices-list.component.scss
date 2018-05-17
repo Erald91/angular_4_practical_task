@@ -1,0 +1,36 @@
+.invoices-list-container {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #343a40;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px auto;
+
+    &_list {
+        min-height: 300px;
+
+        &_item {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+
+            &_text {
+                width: 80%;
+                white-space: nowrap;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &_actions {
+                display: flex;
+                width: 20%;
+                justify-content: space-evenly;
+
+                &_icon {
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}
