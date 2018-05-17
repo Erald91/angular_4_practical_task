@@ -4,7 +4,12 @@
     height: 100vh;
     flex-direction: column;
 
-    .container {
+    .avatar-image {
+        border-radius: 50%;
+        border: 1px solid #C1C1C1;
+    }
+
+    .container-fluid {
         display: flex;
         min-height: calc(100% - 112px);
     }

@@ -30,7 +30,7 @@ export class LoginComponent {
     public onLoginFormSubmit(event) {
         this.isLoading = true;
         this._auth
-            .doValidation(this.emailField, this.passwordField)
+            .doLogIn(this.emailField, this.passwordField)
             .subscribe((response: any) => {
                 this.isLoading = false;
                 if(!response.success) {
@@ -41,7 +41,6 @@ export class LoginComponent {
                 }
                 // TODO: Do proper redirection after successfull login
                 this._router.navigate(['/main']);
-                console.log(response);
             })
     }
 }
