@@ -1,35 +1,50 @@
+@keyframes rotating {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+@mixin centeredMask {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
 .invoices-list-container {
     width: 450px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #343a40;
+    border: 1px solid #343A40;
     border-radius: 5px;
     padding: 10px;
     margin: 0px auto;
 
     &_list {
-        min-height: 300px;
+        height: 300px;
 
-        &_item {
-            display: flex;
-            width: 100%;
-            flex-direction: row;
+        &_group {
+            position: relative;
+            height: 100%;
 
-            &_text {
-                width: 80%;
-                white-space: nowrap;
-                overflow-x: hidden;
-                text-overflow: ellipsis;
+            &_loader {
+                @include centeredMask;
+                background-color: rgba($color: rgb(0, 0, 0), $alpha: 0.4);
+
+                & i.fa {
+                    animation-name: rotating;
+                    animation-duration: 1s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+                    font-size: 35px;
+                    color: #D0CDCD;
+                }
             }
 
-            &_actions {
-                display: flex;
-                width: 20%;
-                justify-content: space-evenly;
-
-                &_icon {
-                    font-size: 22px;
-                }
+            &_empty {
+                @include centeredMask;
             }
         }
     }

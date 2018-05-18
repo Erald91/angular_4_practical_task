@@ -8,25 +8,17 @@
         </div>
     </div>
     <div class="invoices-list-container_list">
-        <div class="list-group">
-            <a href="javascript:void(0)" class="invoices-list-container_list_item list-group-item list-group-item-action active">
-                <div class="invoices-list-container_list_item_text">
-                    Cras justo odio
-                </div>
-                <div class="invoices-list-container_list_item_actions">
-                    <i class="invoices-list-container_list_item_actions_icon fa fa-trash" aria-hidden="true" title="Delete"></i>
-                    <i class="invoices-list-container_list_item_actions_icon fa fa-clone" aria-hidden="true" title="Duplicate"></i>
-                </div>
-            </a>
-            <a href="javascript:void(0)" class="invoices-list-container_list_item list-group-item list-group-item-action">
-                <div class="invoices-list-container_list_item_text">
-                    Cras justo odio
-                </div>
-                <div class="invoices-list-container_list_item_actions">
-                    <i class="invoices-list-container_list_item_actions_icon fa fa-trash" aria-hidden="true" title="Delete"></i>
-                    <i class="invoices-list-container_list_item_actions_icon fa fa-clone" aria-hidden="true" title="Duplicate"></i>
-                </div>
-            </a>
+        <div class="invoices-list-container_list_group list-group">
+            <!-- Iterate through invoices -->
+            <app-invoice *ngFor="let invoice of invoicesList" [invoice]="invoice"></app-invoice>
+            <!-- Loader element -->
+            <div class="invoices-list-container_list_group_loader" *ngIf="isLoading">
+                <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+            </div>
+            <!-- Empty list message -->
+            <div class="invoices-list-container_list_group_empty" *ngIf="!invoicesList.length">
+                Invoices list is empty
+            </div>
         </div>
     </div>
 </div>
