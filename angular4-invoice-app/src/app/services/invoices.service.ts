@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Invoice } from '../guarded-app/invoices-list/models/Invoice';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { of, from } from 'rxjs';
+import { delay, map, debounceTime } from 'rxjs/operators';
 import { findIndex } from 'lodash';
 
 const INVOICES_LIST_KEY = 'invoices';
@@ -13,10 +13,13 @@ export class InvoiceService {
 
     }
 
-    public getInvoicesList(seed: boolean = false) {
+    public getInvoicesList(searchToken: string = '', seed: boolean = false) {
         // Seed mock data
         seed && this._seedData();
-        return this._parseToPromise(this._getInvoicesRecords());
+        let invoicesRecords = this._getInvoicesRecords();
+
+        if(!searchToken) return this._parseToPromise(invoicesRecords);
+        else return this._parseToFilteredPromise(invoicesRecords, searchToken);
     }
 
     public deleteAction(id: string) {
@@ -52,11 +55,18 @@ export class InvoiceService {
     }
 
     private _getInvoicesRecords() {
-        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY);
+        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY);        
     }
 
     private _parseToPromise(data: any) {
         return of(data).pipe(delay(300)).toPromise();
+    }
+
+    private _parseToFilteredPromise(data: Array<Invoice>, searchToken: string) {
+        return of(data).pipe(
+            delay(500), 
+            map(list => list.filter(invoice => invoice.name.startsWith(searchToken)))
+        ).toPromise();
     }
 
     private _seedData() {

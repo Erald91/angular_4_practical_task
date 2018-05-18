@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Invoice } from './models/Invoice';
 import { InvoiceService } from '../../services/invoices.service';
+import { fromEvent } from 'rxjs';
+import { map, debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'invoices-list',
@@ -10,6 +12,10 @@ import { InvoiceService } from '../../services/invoices.service';
 export class InvoicesListComponent {
     public invoicesList: Array<Invoice> = [];
     public isLoading: boolean = false;
+    public searchString: string = '';
+
+    @ViewChild('searchInput')
+    public inputField: ElementRef;
 
     constructor(private _invoiceService: InvoiceService) {
 
@@ -17,11 +23,21 @@ export class InvoicesListComponent {
 
     ngOnInit() {
         this.init(true);
+        
+        // Added debounce delay for search input changes during data queries
+        fromEvent(this.inputField.nativeElement, 'keyup').pipe(
+            map((event: any) => event.target.value),
+            debounceTime(700)
+        )
+        .subscribe(searchToken => {
+            this.searchString = searchToken;
+            this.init();
+        });
     }
 
     public init(doSeed = false) {
         this.isLoading = true;
-        this._invoiceService.getInvoicesList(doSeed).then((response: Array<Invoice>) => {
+        this._invoiceService.getInvoicesList(this.searchString, doSeed).then((response: Array<Invoice>) => {
             this.invoicesList = response;
             this.isLoading = false;
         });

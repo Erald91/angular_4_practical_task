@@ -1,24 +1,21 @@
 <div class="invoices-list-container">
     <div class="invoices-list-container_search-container">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search...">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Search</button>
-            </div>
+            <input type="text" class="form-control" placeholder="Search..." #searchInput>
         </div>
     </div>
     <div class="invoices-list-container_list">
         <div class="invoices-list-container_list_group list-group" [class.scroll-content]="invoicesList.length > 6">
             <!-- Iterate through invoices -->
             <app-invoice *ngFor="let invoice of invoicesList" [invoice]="invoice" (action)="onInvoiceAltered($event)"></app-invoice>
-            <!-- Loader element -->
-            <div class="invoices-list-container_list_group_loader" *ngIf="isLoading">
-                <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
-            </div>
             <!-- Empty list message -->
             <div class="invoices-list-container_list_group_empty" *ngIf="!invoicesList.length && !isLoading">
                 Invoices list is empty
             </div>
+        </div>
+         <!-- Loader element -->
+         <div class="invoices-list-container_list_loader" *ngIf="isLoading">
+            <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
         </div>
     </div>
 </div>

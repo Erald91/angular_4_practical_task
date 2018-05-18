@@ -25,33 +25,33 @@
     margin: 0px auto;
 
     &_list {
+        position: relative;
         height: 310px;
 
         &_group {
-            position: relative;
             height: 100%;
             
             &.scroll-content {
                 overflow-y: scroll;
             }
 
-            &_loader {
-                @include centeredMask;
-                background-color: rgba($color: rgb(0, 0, 0), $alpha: 0.4);
-                z-index: 1500;
-
-                & i.fa {
-                    animation-name: rotating;
-                    animation-duration: 1s;
-                    animation-iteration-count: infinite;
-                    animation-timing-function: linear;
-                    font-size: 35px;
-                    color: #D0CDCD;
-                }
-            }
-
             &_empty {
                 @include centeredMask;
+            }
+        }
+
+        &_loader {
+            @include centeredMask;
+            background-color: rgba($color: rgb(0, 0, 0), $alpha: 0.4);
+            z-index: 1500;
+
+            & i.fa {
+                animation-name: rotating;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+                font-size: 35px;
+                color: #D0CDCD;
             }
         }
     }
