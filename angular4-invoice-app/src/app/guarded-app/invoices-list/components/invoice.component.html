@@ -3,7 +3,7 @@
         {{ invoice.name }}
     </div>
     <div class="item_actions">
-        <i class="item_actions_icon fa fa-trash" aria-hidden="true" title="Delete"></i>
-        <i class="item_actions_icon fa fa-clone" aria-hidden="true" title="Duplicate"></i>
+        <i class="item_actions_icon fa fa-trash" aria-hidden="true" title="Delete" (click)="manageAction($event, 'delete')"></i>
+        <i class="item_actions_icon fa fa-clone" aria-hidden="true" title="Duplicate" (click)="manageAction($event, 'duplicate')"></i>
     </div>
 </a>

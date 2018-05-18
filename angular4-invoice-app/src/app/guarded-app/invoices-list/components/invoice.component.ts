@@ -10,4 +10,12 @@ export class InvoiceComponent {
     @Input() invoice: Invoice;
     @Input() selected: boolean = false;
     @Output() action: EventEmitter<any> = new EventEmitter();
+
+    constructor() {
+
+    }
+
+    public manageAction(event, actionType) {
+        this.action.emit({ id: this.invoice.id, action: actionType });
+    }
 }

@@ -8,15 +8,15 @@
         </div>
     </div>
     <div class="invoices-list-container_list">
-        <div class="invoices-list-container_list_group list-group">
+        <div class="invoices-list-container_list_group list-group" [class.scroll-content]="invoicesList.length > 6">
             <!-- Iterate through invoices -->
-            <app-invoice *ngFor="let invoice of invoicesList" [invoice]="invoice"></app-invoice>
+            <app-invoice *ngFor="let invoice of invoicesList" [invoice]="invoice" (action)="onInvoiceAltered($event)"></app-invoice>
             <!-- Loader element -->
             <div class="invoices-list-container_list_group_loader" *ngIf="isLoading">
                 <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
             </div>
             <!-- Empty list message -->
-            <div class="invoices-list-container_list_group_empty" *ngIf="!invoicesList.length">
+            <div class="invoices-list-container_list_group_empty" *ngIf="!invoicesList.length && !isLoading">
                 Invoices list is empty
             </div>
         </div>
