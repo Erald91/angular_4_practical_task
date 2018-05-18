@@ -76,6 +76,7 @@ export class InvoiceService {
             new Invoice('Invoice 3'),
             new Invoice('Invoice 4'),
             new Invoice('Invoice 5'),
+            new Invoice('Invoice 6'),
         ]);
     }
 }
