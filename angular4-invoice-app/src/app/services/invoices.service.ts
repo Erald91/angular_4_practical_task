@@ -70,7 +70,7 @@ export class InvoiceService {
     }
 
     private _getInvoicesRecords() {
-        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY);        
+        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY) || [];        
     }
 
     private _parseToPromise(data: any) {

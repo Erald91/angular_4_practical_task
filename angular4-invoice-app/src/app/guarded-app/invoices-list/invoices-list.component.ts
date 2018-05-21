@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { Invoice } from './models/Invoice';
 import { InvoiceService } from '../../services/invoices.service';
 import { fromEvent } from 'rxjs';
@@ -9,7 +9,8 @@ import { map, debounceTime } from 'rxjs/operators';
     templateUrl: './invoices-list.component.html',
     styleUrls: ['./invoices-list.component.scss']
 })
-export class InvoicesListComponent {
+export class InvoicesListComponent implements OnInit, OnChanges {
+    @Input() cacheVersion: number;
     public invoicesList: Array<Invoice> = [];
     public isLoading: boolean = false;
     public searchString: string = '';
@@ -21,8 +22,12 @@ export class InvoicesListComponent {
 
     }
 
+    ngOnChanges() {
+        this.init();
+    }
+
     ngOnInit() {
-        this.init(true);
+        this.init(false);
         
         // Added debounce delay for search input changes during data queries
         fromEvent(this.inputField.nativeElement, 'keyup').pipe(

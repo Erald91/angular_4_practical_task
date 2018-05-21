@@ -9,16 +9,16 @@ import { InvoiceService } from '../../services/invoices.service';
 export class MainComponent {
     public invoiceNameInputValue: string = '';
     public isAdding: boolean = false;
-    public cacheValue: number = 1;
+    public cacheVersion: number = 1;
 
     constructor(private _invoiceService: InvoiceService) {}
 
     public onAddInvoice(event) {
         this.isAdding = true;
-        this._invoiceService.addInvoiceRecord(this.invoiceNameInputValue).then(response => {
+        this._invoiceService.addInvoiceRecord(this.invoiceNameInputValue.trim()).then(response => {
             this.isAdding = false;
             this.invoiceNameInputValue = '';
-            this.cacheValue++;
-        })
+            this.cacheVersion++;
+        });
     }
 }
