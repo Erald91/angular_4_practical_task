@@ -6,9 +6,13 @@
 <div class="row">
     <div class="col">
         <div class="input-group my-3 mx-auto add-invoice-group">
-            <input type="text" class="form-control" placeholder="Invoice name..." [(ngModel)]="invoiceNameInputValue">
+            <input type="text" class="form-control" placeholder="Invoice name..." [(ngModel)]="invoiceNameInputValue" (keyup)="$event.which == '13' && !(!invoiceNameInputValue.trim().length || isAdding) && onAddInvoice($event)">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" [disabled]="!invoiceNameInputValue.trim().length || isAdding" (click)="onAddInvoice($event)">
+                <button 
+                    class="btn btn-outline-secondary" 
+                    type="button" 
+                    [disabled]="!invoiceNameInputValue.trim().length || isAdding" 
+                    (click)="onAddInvoice($event)">
                     {{ isAdding ? 'Adding...' : 'Add' }}
                 </button>
             </div>
