@@ -5,6 +5,18 @@
 </div>
 <div class="row">
     <div class="col">
+        <div class="input-group my-3 mx-auto add-invoice-group">
+            <input type="text" class="form-control" placeholder="Invoice name..." [(ngModel)]="invoiceNameInputValue">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" [disabled]="!invoiceNameInputValue.length || isAdding" (click)="onAddInvoice($event)">
+                    {{ isAdding ? 'Adding...' : 'Add' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
         <invoices-list></invoices-list>
     </div>
 </div>

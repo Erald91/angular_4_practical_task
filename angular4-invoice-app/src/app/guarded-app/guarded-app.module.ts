@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { MainComponent } from './main/main.component';
 import { InvoiceComponent } from './invoices-list/components/invoice.component';
@@ -12,7 +13,8 @@ import { GuardedAppRoutingModule } from './guarded-app-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    GuardedAppRoutingModule,
+    FormsModule,
+    GuardedAppRoutingModule
   ],
   declarations: [
     MainComponent,

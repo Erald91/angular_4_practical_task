@@ -1,3 +1,5 @@
+@import '../_styles';
+
 @keyframes rotating {
     0% { transform: rotate(0deg) }
     100% { transform: rotate(360deg) }
@@ -16,7 +18,7 @@
 }
 
 .invoices-list-container {
-    width: 450px;
+    width: $mainBaseWidth;
     display: flex;
     flex-direction: column;
     border: 1px solid #343A40;

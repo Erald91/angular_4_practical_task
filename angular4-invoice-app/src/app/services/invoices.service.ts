@@ -54,6 +54,21 @@ export class InvoiceService {
         return this._parseToPromise(responseObject);
     }
 
+    public addInvoiceRecord(invoiceName: string) {
+        let invoiceRecords = this._getInvoicesRecords();
+        // Add the new record at beginning of the array
+        invoiceRecords.unshift(new Invoice(invoiceName));
+        let responseObject = { success: true };
+
+        try {
+            this._localStorage.set(INVOICES_LIST_KEY, invoiceRecords);
+        } catch(e) {
+            responseObject.success = false;
+        }
+
+        return this._parseToPromise(responseObject);
+    }
+
     private _getInvoicesRecords() {
         return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY);        
     }
