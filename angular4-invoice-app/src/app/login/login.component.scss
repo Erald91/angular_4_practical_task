@@ -5,7 +5,28 @@
     justify-content: center;
 
     .form-group {
+        margin-bottom: 0px !important;
+
         .form-control {
+            &#emailField {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+
+            &#passwordField {
+                border-top-left-radius: 0px;
+                border-top-right-radius: 0px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            &:focus {
+                border-color: #ced4da !important;
+                box-shadow: unset !important;
+            }
+
             &.invalid-input-value {
                 border-left: 5px solid red;
             }
@@ -14,6 +35,10 @@
         .custom-alert {
             margin-top: 10px;
         }
+    }
+
+    button.submit-button {
+        width: 100%;
     }
     
 }

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <h3 class="text-center">Login</h3>
+        <h3 class="text-center my-4">Login</h3>
     </div>
 </div>
 <div class="row">
@@ -10,7 +10,6 @@
                 {{ authenticationMessage }}
             </div>
             <div class="form-group">
-                <label for="emailField">Email address</label>
                 <input 
                     [class.invalid-input-value]="isEmailError"
                     type="email" 
@@ -22,12 +21,8 @@
                     required 
                     #email="ngModel" 
                     (input)="manageFormControlChange($event, 'isEmailError')">
-                <div class="alert alert-danger custom-alert" role="alert" *ngIf="!email.valid && !email.pristine && !email.value.trim().length">
-                    Email field is required
-                </div>
             </div>
             <div class="form-group">
-                <label for="passwordField">Password</label>
                 <input 
                     [class.invalid-input-value]="isPasswordError"
                     type="password" 
@@ -39,11 +34,13 @@
                     required 
                     #password="ngModel" 
                     (input)="manageFormControlChange($event, 'isPasswordError')">
-                <div class="alert alert-danger custom-alert" role="alert" *ngIf="!password.valid && !password.pristine && !password.value.trim().length">
-                    Password field is required
+                <div class="alert alert-danger custom-alert" role="alert" *ngIf="(!password.valid && !password.pristine && !password.value.trim().length) || (!email.valid && !email.pristine && !email.value.trim().length)">
+                    {{ (!email.valid && !email.pristine && !email.value.trim().length) && !(!password.valid && !password.pristine && !password.value.trim().length) ? 'Email field is required' : ''}}
+                    {{ !(!email.valid && !email.pristine && !email.value.trim().length) && (!password.valid && !password.pristine && !password.value.trim().length) ? 'Password field is required' : ''}}
+                    {{ (!email.valid && !email.pristine && !email.value.trim().length) && (!password.valid && !password.pristine && !password.value.trim().length) ? 'Email and Password fields are required' : ''}}
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" [disabled]="!loginForm.valid || isLoading" (click)="onLoginFormSubmit($event)">{{ isLoading ? 'Loading...' : 'Submit' }}</button>
+            <button type="button" class="btn btn-primary my-3 submit-button" [disabled]="!loginForm.valid || isLoading" (click)="onLoginFormSubmit($event)">{{ isLoading ? 'Loading...' : 'Submit' }}</button>
         </form>
     </div>
 </div>
