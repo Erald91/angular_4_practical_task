@@ -80,7 +80,7 @@ export class InvoiceService {
     private _parseToFilteredPromise(data: Array<Invoice>, searchToken: string) {
         return of(data).pipe(
             delay(500), 
-            map(list => list.filter(invoice => invoice.name.startsWith(searchToken)))
+            map(list => list.filter(invoice => (new RegExp(searchToken, "ig")).test(invoice.name)))
         ).toPromise();
     }
 
