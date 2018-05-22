@@ -14,3 +14,8 @@ Prevent using plugins, all part expect scrollbar(if you will use it) must be cus
 
 * Angular 4
 * RxJS
+
+### Application credentials
+
+* Email: test@test.com
+* Password: dummyPassword
