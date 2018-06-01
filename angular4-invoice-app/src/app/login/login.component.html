@@ -36,10 +36,8 @@
                     #password="ngModel" 
                     (input)="manageFormControlChange($event, 'isPasswordError')" 
                     (keyup)="$event.which == 13 && !(!loginForm.valid || isLoading) && onLoginFormSubmit($event)">
-                <div class="alert alert-danger custom-alert" role="alert" *ngIf="(!password.valid && !password.pristine && !password.value.trim().length) || (!email.valid && !email.pristine && !email.value.trim().length)">
-                    {{ (!email.valid && !email.pristine && !email.value.trim().length) && !(!password.valid && !password.pristine && !password.value.trim().length) ? 'Email field is required' : ''}}
-                    {{ !(!email.valid && !email.pristine && !email.value.trim().length) && (!password.valid && !password.pristine && !password.value.trim().length) ? 'Password field is required' : ''}}
-                    {{ (!email.valid && !email.pristine && !email.value.trim().length) && (!password.valid && !password.pristine && !password.value.trim().length) ? 'Email and Password fields are required' : ''}}
+                <div class="alert alert-danger custom-alert" role="alert" *ngIf="areCredentialsInvalid(password, email)">
+                    {{ invalidCredentialsMessage(password, email) }}
                 </div>
             </div>
             <button type="button" class="btn btn-primary my-3 submit-button" [disabled]="!loginForm.valid || isLoading" (click)="onLoginFormSubmit($event)">{{ isLoading ? 'Loading...' : 'Submit' }}</button>
