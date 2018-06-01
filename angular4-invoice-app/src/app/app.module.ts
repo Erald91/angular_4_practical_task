@@ -14,7 +14,7 @@ import { LoginGuard } from './services/login-guard.service';
 import { AuthService } from './services/auth.service';
 
 const routesList: Array<Route> = [
-  { path:'login', component: LoginComponent, canActivate: [LoginGuard] }
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] }
 ];
 
 @NgModule({
@@ -30,7 +30,7 @@ const routesList: Array<Route> = [
     StorageServiceModule
   ],
   providers: [
-    AuthService, 
+    AuthService,
     AuthGuard,
     LoginGuard
   ],

@@ -7,9 +7,9 @@ import { InvoiceService } from '../../services/invoices.service';
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
-    public invoiceNameInputValue: string = '';
-    public isAdding: boolean = false;
-    public cacheVersion: number = 1;
+    public invoiceNameInputValue = '';
+    public isAdding = false;
+    public cacheVersion = 1;
 
     constructor(private _invoiceService: InvoiceService) {}
 

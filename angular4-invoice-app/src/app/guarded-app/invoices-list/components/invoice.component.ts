@@ -8,7 +8,7 @@ import { Invoice } from '../models/Invoice';
 })
 export class InvoiceComponent {
     @Input() invoice: Invoice;
-    @Input() selected: boolean = false;
+    @Input() selected = false;
     @Output() action: EventEmitter<any> = new EventEmitter();
 
     constructor() {

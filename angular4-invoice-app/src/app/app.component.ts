@@ -7,14 +7,14 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public isLogged: boolean = false;
-  public loggedUserEmail: string = '';
+  public isLogged = false;
+  public loggedUserEmail = '';
 
   constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this._auth.getStateLoginListener().subscribe(authData => {
-      if(authData) {
+      if (authData) {
         this.isLogged = true;
         this.loggedUserEmail = authData.email;
       } else {

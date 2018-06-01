@@ -8,8 +8,8 @@ const USER_KEY = 'user';
 
 @Injectable()
 export class AuthService {
-    private _loginEmail: string = 'test@test.com';
-    private _loginPassword: string = 'dummyPassword';
+    private _loginEmail = 'test@test.com';
+    private _loginPassword = 'dummyPassword';
     private _activeUserData: any = null;
     private _stateLogin: EventEmitter<any> = new EventEmitter();
 
@@ -20,8 +20,8 @@ export class AuthService {
         const isPasswordValid = password === this._loginPassword;
         const isValidLogin = isEmailValid && isPasswordValid;
 
-        let validationPromise = new Promise((resolve, reject) => {
-            if(isValidLogin) {
+        const validationPromise = new Promise((resolve, reject) => {
+            if (isValidLogin) {
                 resolve({ success: true, message: 'User authenticated successfully' });
                 this._localStorage.set(USER_KEY, { email, password });
             } else {
@@ -29,13 +29,15 @@ export class AuthService {
             }
         });
 
-        // Delay response for 2 seconds in order to simulate asynchronous call 
+        // Delay response for 2 seconds in order to simulate asynchronous call
         return from(validationPromise)
             .pipe(
-                delay(2000), 
-                map((response: any) => { 
-                    response.success && this._stateLogin.emit({ email, password }); 
-                    return response; 
+                delay(2000),
+                map((response: any) => {
+                    if (response.success) {
+                        this._stateLogin.emit({ email, password });
+                    }
+                    return response;
                 }
             ));
     }
@@ -47,7 +49,7 @@ export class AuthService {
     }
 
     public isAuthenticated() {
-        let userRecord: any = this._localStorage.get(USER_KEY) || null;
+        const userRecord: any = this._localStorage.get(USER_KEY) || null;
         this._activeUserData = userRecord;
         this._stateLogin.emit(this._activeUserData);
 

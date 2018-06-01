@@ -5,14 +5,14 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class LoginGuard implements CanActivate {
     constructor(
-        private _auth: AuthService, 
+        private _auth: AuthService,
         private _router: Router
     ) {}
 
     public canActivate() {
-        if(this._auth.isAuthenticated()) {
+        if (this._auth.isAuthenticated()) {
             this._router.navigate(['/main']);
-            return false
+            return false;
         } else {
             return true;
         }

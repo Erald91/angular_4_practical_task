@@ -3,24 +3,22 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: '.app-login',
+    selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-    public emailField: string = '';
-    public passwordField: string = '';
+    public emailField = '';
+    public passwordField = '';
 
-    public isEmailError: boolean = false;
-    public isPasswordError: boolean = false;
+    public isEmailError = false;
+    public isPasswordError = false;
 
-    public isLoading: boolean = false;
-    public authenticationMessage: string = '';
-    public isAuthenticationMessageShown: boolean = false;
+    public isLoading = false;
+    public authenticationMessage = '';
+    public isAuthenticationMessageShown = false;
 
-    constructor(private _auth: AuthService, private _router: Router) {
-        
-    }
+    constructor(private _auth: AuthService, private _router: Router) { }
 
     public manageFormControlChange(event, errorPropertykey) {
         this.isAuthenticationMessageShown = false;
@@ -33,7 +31,7 @@ export class LoginComponent {
             .doLogIn(this.emailField, this.passwordField)
             .subscribe((response: any) => {
                 this.isLoading = false;
-                if(!response.success) {
+                if (!response.success) {
                     this.isEmailError = !response.email;
                     this.isPasswordError = !response.password;
                     this.authenticationMessage = response.message;
@@ -41,6 +39,6 @@ export class LoginComponent {
                 }
                 // TODO: Do proper redirection after successfull login
                 this._router.navigate(['/main']);
-            })
+            });
     }
 }

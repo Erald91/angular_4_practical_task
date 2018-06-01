@@ -15,54 +15,59 @@ export class InvoiceService {
 
     public getInvoicesList(searchToken: string = '', seed: boolean = false) {
         // Seed mock data
-        seed && this._seedData();
-        let invoicesRecords = this._getInvoicesRecords();
+        if (seed) {
+            this._seedData();
+        }
+        const invoicesRecords = this._getInvoicesRecords();
 
-        if(!searchToken) return this._parseToPromise(invoicesRecords);
-        else return this._parseToFilteredPromise(invoicesRecords, searchToken);
+        if (!searchToken) {
+            return this._parseToPromise(invoicesRecords);
+        } else {
+            return this._parseToFilteredPromise(invoicesRecords, searchToken);
+        }
     }
 
     public deleteAction(id: string) {
-        let invoicesList = this._getInvoicesRecords();
-        let filteredList = invoicesList.filter(invoice => invoice.id != id);
-        let responseObject = { success: true };
+        const invoicesList = this._getInvoicesRecords();
+        const filteredList = invoicesList.filter(invoice => invoice.id !== id);
+        const responseObject = { success: true };
 
         try {
             this._localStorage.set(INVOICES_LIST_KEY, filteredList);
-        } catch(e) {
+        } catch (e) {
             responseObject.success = false;
         }
-        
+
         return this._parseToPromise(responseObject);
     }
 
     public duplicateAction(id: string) {
-        let invoicesList = this._getInvoicesRecords();
-        let responseObject = { success: true };
+        const invoicesList = this._getInvoicesRecords();
+        const responseObject = { success: true };
 
         try {
-            let invoicePosition = findIndex(invoicesList, invoice => invoice.id == id);
-            let invoiceData = invoicesList[invoicePosition];
+            let invoicePosition = findIndex(invoicesList, invoice => invoice.id === id);
+            const invoiceData = invoicesList[invoicePosition];
 
             invoicesList.splice(++invoicePosition, 0, new Invoice(`${invoiceData.name} (Copy)`));
 
             this._localStorage.set(INVOICES_LIST_KEY, invoicesList);
-        } catch(e) {
-            responseObject.success = false
+        } catch (e) {
+            responseObject.success = false;
         }
-        
+
         return this._parseToPromise(responseObject);
     }
 
     public addInvoiceRecord(invoiceName: string) {
-        let invoiceRecords = this._getInvoicesRecords();
+        const invoiceRecords = this._getInvoicesRecords();
         // Add the new record at beginning of the array
         invoiceRecords.unshift(new Invoice(invoiceName));
-        let responseObject = { success: true };
+        const responseObject = { success: true };
 
         try {
             this._localStorage.set(INVOICES_LIST_KEY, invoiceRecords);
-        } catch(e) {
+        } catch (e) {
             responseObject.success = false;
         }
 
@@ -70,7 +75,7 @@ export class InvoiceService {
     }
 
     private _getInvoicesRecords() {
-        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY) || [];        
+        return <Array<Invoice>>this._localStorage.get(INVOICES_LIST_KEY) || [];
     }
 
     private _parseToPromise(data: any) {
@@ -79,8 +84,8 @@ export class InvoiceService {
 
     private _parseToFilteredPromise(data: Array<Invoice>, searchToken: string) {
         return of(data).pipe(
-            delay(500), 
-            map(list => list.filter(invoice => (new RegExp(searchToken, "ig")).test(invoice.name)))
+            delay(500),
+            map(list => list.filter(invoice => (new RegExp(searchToken, 'ig')).test(invoice.name)))
         ).toPromise();
     }
 
